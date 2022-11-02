@@ -19,10 +19,10 @@ time.sleep(2)
 driver.find_element_by_xpath('//*[@id="routes-container"]/div[1]/div[1]/div[2]/div/div[1]/div[1]/div[1]/input').send_keys(email)
 driver.find_element_by_xpath('//*[@id="routes-container"]/div[1]/div[1]/div[2]/div/div[1]/div[1]/div[2]/input').send_keys(password)
 driver.find_element_by_xpath('//*[@id="routes-container"]/div[1]/div[1]/div[2]/div/div[1]/div[1]/div[3]/button').click()
-request = driver.wait_for_request('https://svc.goformative.com/graphql/mutation/LoginWith')
+request = driver.wait_for_request('https://svc.goformative.com/graphql/auth/mutation/LoginWith')
 for request in driver.requests:
     if request.response:
-            if request.url.startswith("https://svc.goformative.com/graphql/mutation/LoginWith"):
+            if request.url.startswith("https://svc.goformative.com/graphql/auth/mutation/LoginWith"):
                     body = decode(request.response.body, request.response.headers.get('Content-Encoding', 'identity'))
                     jsonResponse = json.loads(body.decode('utf-8'))
                     JWTToken = jsonResponse['data']['login']['loginToken']
